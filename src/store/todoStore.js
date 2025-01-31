@@ -5,6 +5,7 @@ const useTodoStore = create(
   persist(
     (set) => ({
       todos: [],
+      deletedTodos: [],
 
       addTodo: (text) =>
         set((state) => ({
@@ -19,12 +20,26 @@ const useTodoStore = create(
         })),
 
       removeTodo: (id) =>
-        set((state) => ({
-          todos: state.todos.filter((todo) => todo.id !== id),
-        })),
+        set((state) => {
+          const todoToDelete = state.todos.find((todo) => todo.id === id);
+          return {
+            todos: state.todos.filter((todo) => todo.id !== id),
+            deletedTodos: [...state.deletedTodos, todoToDelete],
+          };
+        }),
+
+      restoreTodo: (id) =>
+        set((state) => {
+          const todoToRestore = state.deletedTodos.find((todo) => todo.id === id);
+          return {
+            todos: [...state.todos, todoToRestore],
+            deletedTodos: state.deletedTodos.filter((todo) => todo.id !== id),
+          };
+        }),
     }),
     {
       name: "todo-storage",
+      getStorage: () => localStorage,
     }
   )
 );

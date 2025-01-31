@@ -142,3 +142,29 @@ h1 {
 .todo-item button:hover {
   background-color: #c0392b;
 }
+
+.filter-buttons {
+  margin-bottom: 10px;
+}
+
+.filter-buttons button {
+  background-color: #ccc;
+  border: none;
+  padding: 8px 12px;
+  margin-right: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.filter-buttons button:hover {
+  background-color: #bbb;
+}
+
+.deleted-todo {
+  display: flex;
+  justify-content: space-between;
+  background-color: #ffcccc;
+  padding: 10px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+}
